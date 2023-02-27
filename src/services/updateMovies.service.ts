@@ -5,12 +5,12 @@ import {
   movie,
   movieRequest,
   movieReturnAll,
-  moviUpdated,
+  movieUpdated,
 } from "../interface/movies.interface";
 import { movieId, MovieSchema, returnAll } from "../schema/movies.schema";
 
 const updateMovies = async (
-  Data: moviUpdated,
+  Data: movieUpdated,
   id: number
 ): Promise<movieRequest> => {
   const moviesRepo: Repository<Movie> = AppDataSource.getRepository(Movie);

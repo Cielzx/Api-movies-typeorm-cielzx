@@ -14,9 +14,11 @@ type movieRequest = z.infer<typeof MovieSchema>;
 
 type movie = z.infer<typeof movieId>;
 
+type movieUpd = z.infer<typeof movieUpdateSchema>;
+
 type movieResult = QueryResult<movie>;
 
-type moviUpdated = DeepPartial<movie>;
+type movieUpdated = DeepPartial<movieRequest>;
 
 type movieReturnAll = z.infer<typeof returnAll>;
 
@@ -29,4 +31,12 @@ interface iPage {
   data: movieReturnAll;
 }
 
-export { movie, movieRequest, movieResult, movieReturnAll, moviUpdated, page };
+export {
+  movie,
+  movieRequest,
+  movieResult,
+  movieReturnAll,
+  movieUpdated,
+  movieUpd,
+  page,
+};

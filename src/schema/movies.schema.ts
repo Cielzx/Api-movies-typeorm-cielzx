@@ -3,8 +3,8 @@ import z from "zod";
 const MovieSchema = z.object({
   name: z.string().max(50).min(3),
   description: z.string().optional().nullable(),
-  duration: z.number(),
-  price: z.number(),
+  duration: z.number().int().positive(),
+  price: z.number().int().positive(),
 });
 
 const movieId = MovieSchema.extend({

@@ -11,11 +11,11 @@ const ensureNameIsEqual = async (
 ): Promise<void> => {
   const movieRepo: Repository<Movie> = AppDataSource.getRepository(Movie);
 
-  const findMovieName = await movieRepo.findOneBy({
-    name: req.body.name,
-  });
+  const test = await movieRepo.find();
 
-  if (findMovieName) {
+  const filter = test.find((el) => el.name === req.body.name);
+
+  if (filter) {
     throw new appError("Movie already exists.", 409);
   }
 

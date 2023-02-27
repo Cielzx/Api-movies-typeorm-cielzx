@@ -14,7 +14,39 @@ const createMovies = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const listAllMovies = async (req: Request, res: Response) => {
-  const getMovieData = await listMovies(req.query);
+  let page: number = Number(req.query.page) || 1;
+
+  let perPage: number = Number(req.query.perPage) || 5;
+
+  if (page <= 0 || page === undefined) {
+    page = 1;
+  }
+
+  if (perPage <= 0 || perPage === undefined || perPage >= 5) {
+    perPage = 5;
+  }
+
+  const baseUrl: string = `http://localhost:3000/movies`;
+
+  let prevPage: string | null = `${baseUrl}?page=${
+    page - 1
+  }&perPage=${perPage}`;
+  let nextPage: string | null = `${baseUrl}?page=${
+    page + 1
+  }&perPage=${perPage}`;
+
+  if (page <= 1) {
+    prevPage = null;
+  }
+
+  req.Pages = {
+    prevPage: prevPage,
+    nextPage: nextPage,
+    page: page,
+    perPage: perPage,
+  };
+
+  const getMovieData = await listMovies(req);
 
   return res.json(getMovieData);
 };

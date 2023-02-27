@@ -18,6 +18,7 @@ movieRoutes.post(
   ensureNameIsEqual,
   createMovies
 );
+
 movieRoutes.get("", listAllMovies);
 movieRoutes.delete("/:id", ensureMovieExist, deleteMovies);
 movieRoutes.patch(
