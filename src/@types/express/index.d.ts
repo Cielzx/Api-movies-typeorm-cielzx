@@ -6,6 +6,8 @@ declare global {
       Pages: {
         prevPage: string | null;
         nextPage: string | null;
+        sorting: string | undefined;
+        ordering: string | undefined;
         page: number;
         perPage: number;
       };

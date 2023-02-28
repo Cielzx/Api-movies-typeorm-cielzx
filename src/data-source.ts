@@ -14,10 +14,10 @@ const dataSourceConfig = (): DataSourceOptions => {
     throw new Error("Database_URL not exists");
   }
 
-  if (nodeEnv === "teste") {
+  if (nodeEnv === "test") {
     return {
       type: "sqlite",
-      database: "memory",
+      database: ":memory:",
       synchronize: true,
       entities: [entPath],
     };

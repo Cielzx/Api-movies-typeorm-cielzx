@@ -1,14 +1,7 @@
-import { count } from "console";
-import { Request, Response } from "express";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Movie } from "../entities";
-import {
-  movie,
-  movieRequest,
-  movieReturnAll,
-  page,
-} from "../interface/movies.interface";
+import { movieReturnAll, page } from "../interface/movies.interface";
 import { movieId, returnAll } from "../schema/movies.schema";
 
 const listMovies = async (payload: any): Promise<page> => {
@@ -18,13 +11,9 @@ const listMovies = async (payload: any): Promise<page> => {
 
   let page = Number(payload.Pages.page);
 
-  let ordering = payload.query.order;
+  let ordering = payload.Pages.ordering || "asc";
 
-  let sorting = payload.query.sort || "id";
-
-  if (ordering === undefined) {
-    ordering = "ASC";
-  }
+  let sorting = payload.Pages.sorting || "id";
 
   let prevPage = payload.Pages.prevPage;
   let nextPage = payload.Pages.nextPage;
@@ -39,7 +28,11 @@ const listMovies = async (payload: any): Promise<page> => {
 
   const findAllMovies = returnAll.parse(getAllmovies);
 
-  if (page >= 5 || findAllMovies.length <= 1) {
+  if (
+    page >= 5 ||
+    findAllMovies.length <= 0 ||
+    (page === 3 && findAllMovies.length === 1)
+  ) {
     nextPage = null;
   }
 

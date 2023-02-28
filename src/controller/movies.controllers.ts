@@ -18,6 +18,14 @@ const listAllMovies = async (req: Request, res: Response) => {
 
   let perPage: number = Number(req.query.perPage) || 5;
 
+  let sorting: any = req.query.sort;
+
+  let ordering: any = req.query.order;
+
+  if (sorting === undefined) {
+    ordering = "ASC";
+  }
+
   if (page <= 0 || page === undefined) {
     page = 1;
   }
@@ -42,6 +50,8 @@ const listAllMovies = async (req: Request, res: Response) => {
   req.Pages = {
     prevPage: prevPage,
     nextPage: nextPage,
+    sorting: sorting,
+    ordering: ordering,
     page: page,
     perPage: perPage,
   };

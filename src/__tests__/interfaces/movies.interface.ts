@@ -1,9 +1,9 @@
 import { DeepPartial, Repository } from "typeorm";
 import { z } from "zod";
 import { Movie } from "../../entities";
-import { MovieSchema } from "../../schema/movies.schema";
+import { movieId } from "../../schema/movies.schema";
 
-type iMovieCreate = z.infer<typeof MovieSchema>;
+type iMovieCreate = z.infer<typeof movieId>;
 type iMovieUpdate = DeepPartial<Movie>;
 type iMovieRepo = Repository<Movie>;
 
