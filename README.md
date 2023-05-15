@@ -1,3 +1,3 @@
-# m4-t14-movies-typeorm
+# Movies-typeorm
 
-Para essa entrega, é necessário executar testes automatizados.
+Api criada utilizando typeorm, funciona com um crud relacionado a criação de filmes.
